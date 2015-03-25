@@ -1,0 +1,31 @@
+{
+  "name": "netants/phpugle",
+  "description": "PHPugle Website",
+  "version": "0.1.0",
+  "keywords": [],
+  "license": "open source",
+  "authors": [
+    {
+      "name": "Ben Willems",
+      "email": "ben@netants.nl",
+      "homepage": "http://www.netants.nl"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.zendframework.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "zendframework/zendframework": "2.3.*",
+    "mobiledetect/mobiledetectlib": "*",
+    "kzykhys/ciconia":"~1.0.0"
+  },
+  "scripts": {
+  },
+  "config": {
+    "discard-changes": true
+  }
+}
