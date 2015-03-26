@@ -1,122 +1,76 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PHPUGLE</title>
-    <meta name="apple-mobile-web-app-title" content="Express">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>404 Not Found</title>
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="/themes/bootstrap-3/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/themes/bootstrap-3/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/themes/bootstrap-3/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="/themes/bootstrap-3/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
+
 <body>
-<h1><?php echo $this->translate('A 404 error occurred') ?></h1>
-<h2><?php echo $this->message ?></h2>
+<div id="wrap">
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="<?php echo $this->serverUrl(); ?>">PHPUGLE</a>
+        </div>
 
-<?php if (isset($this->reason) && $this->reason): ?>
-
-    <?php
-    $reasonMessage= '';
-    switch ($this->reason) {
-        case 'error-controller-cannot-dispatch':
-            $reasonMessage = $this->translate('The requested controller was unable to dispatch the request.');
-            break;
-        case 'error-controller-not-found':
-            $reasonMessage = $this->translate('The requested controller could not be mapped to an existing controller class.');
-            break;
-        case 'error-controller-invalid':
-            $reasonMessage = $this->translate('The requested controller was not dispatchable.');
-            break;
-        case 'error-router-no-match':
-            $reasonMessage = $this->translate('The requested URL could not be matched by routing.');
-            break;
-        default:
-            $reasonMessage = $this->translate('We cannot determine at this time why a 404 was generated.');
-            break;
-    }
-    ?>
-
-    <p><?php echo $reasonMessage ?></p>
-
-<?php endif ?>
-
-<?php if (isset($this->controller) && $this->controller): ?>
-
-    <dl>
-        <dt><?php echo $this->translate('Controller') ?>:</dt>
-        <dd><?php echo $this->escapeHtml($this->controller) ?>
-            <?php
-            if (isset($this->controller_class)
-                && $this->controller_class
-                && $this->controller_class != $this->controller
-            ) {
-                echo '(' . sprintf($this->translate('resolves to %s'), $this->escapeHtml($this->controller_class)) . ')';
-            }
-            ?>
-        </dd>
-    </dl>
-
-<?php endif ?>
-
-<?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
-
-    <?php if(isset($this->exception) && $this->exception instanceof Exception): ?>
-        <hr/>
-        <h2><?php echo $this->translate('Additional information') ?>:</h2>
-        <h3><?php echo get_class($this->exception); ?></h3>
-        <dl>
-            <dt><?php echo $this->translate('File') ?>:</dt>
-            <dd>
-                <pre class="prettyprint linenums"><?php echo $this->exception->getFile() ?>:<?php echo $this->exception->getLine() ?></pre>
-            </dd>
-            <dt><?php echo $this->translate('Message') ?>:</dt>
-            <dd>
-                <pre class="prettyprint linenums"><?php echo $this->exception->getMessage() ?></pre>
-            </dd>
-            <dt><?php echo $this->translate('Stack trace') ?>:</dt>
-            <dd>
-                <pre class="prettyprint linenums"><?php echo $this->exception->getTraceAsString() ?></pre>
-            </dd>
-        </dl>
-        <?php
-        $e = $this->exception->getPrevious();
-        if ($e) :
-            ?>
-            <hr/>
-            <h2><?php echo $this->translate('Previous exceptions') ?>:</h2>
-            <ul class="unstyled">
-                <?php while($e) : ?>
-                    <li>
-                        <h3><?php echo get_class($e); ?></h3>
-                        <dl>
-                            <dt><?php echo $this->translate('File') ?>:</dt>
-                            <dd>
-                                <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
-                            </dd>
-                            <dt><?php echo $this->translate('Message') ?>:</dt>
-                            <dd>
-                                <pre class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
-                            </dd>
-                            <dt><?php echo $this->translate('Stack trace') ?>:</dt>
-                            <dd>
-                                <pre class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
-                            </dd>
-                        </dl>
-                    </li>
-                    <?php
-                    $e = $e->getPrevious();
-                endwhile;
-                ?>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <?php foreach ($navigation as $label => $href) : ?>
+                    <li><a href="<?=$href?>"><?=$label?></a></li>
+                <?php endforeach; ?>
             </ul>
-        <?php endif; ?>
+            <a href="https://github.com/pugle/phpugle.nl"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        </div>
+    </nav>
 
-    <?php else: ?>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span12">
+                <h1>Sorry, this page does not exist! :(</h1>
+                <p>But good news! You can always visit:</p><p>
+                </p><ul>
+                    <li><a href="/">our homepage</a></li>
+                    <li>or <a href="http://www.meetup.com/Limburg-PHP-Meetup/">our meetup page</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-        <h3><?php echo $this->translate('No Exception available') ?></h3>
+</div>
 
-    <?php endif ?>
 
-<?php endif ?>
+<!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/themes/bootstrap-3/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

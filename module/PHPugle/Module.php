@@ -22,6 +22,15 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+
+        /** attach Front layout for 404 errors */
+        $eventManager->attach( MvcEvent::EVENT_DISPATCH_ERROR, function( MvcEvent $event ){
+            $navigation = array("Meetings" => "http://meetup.phpugle.nl");
+            $viewModel = $event->getResult();
+            $viewModel->setVariables( array( 'navigation' => $navigation ) )
+                ->setTemplate( 'error/404' );
+        });
     }
 
     public function getConfig()
